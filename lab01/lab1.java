@@ -8,8 +8,6 @@ public class lab1 {
 		System.out.println("This is a message from the beta branch");
 		
 		System.out.println("This is a message from the master branch");
-
-		System.out.println("THIS IS A DUMMY MESSAGE");
 	}
 }
 
