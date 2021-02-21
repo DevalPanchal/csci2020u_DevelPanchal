@@ -1,0 +1,39 @@
+.main-container {
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-background-color: #282c34;
+}
+
+.form-container {
+    -fx-border-color: #000000;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 24px;
+    -fx-background-color: #ffffff;
+}
+
+.title {
+    -fx-alignment: center;
+    -fx-font-size: 24px;
+}
+
+.submitBtn {
+    -fx-border-radius: 15px;
+    -fx-background-color: #282c34;
+    -fx-text-fill: #ffffff;
+}
+
+.submitBtn:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.submitBtn:pressed {
+    -fx-background-color: #282c34;
+    -fx-text-fill: #ffffff;
+}
+
+.input-label {
+    -fx-font-size: 14px;
+}

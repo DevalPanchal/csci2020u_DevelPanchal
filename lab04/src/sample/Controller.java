@@ -68,7 +68,6 @@ public class Controller {
         });
     }
 
-
     @FXML
     public void btnOnPress(ActionEvent e) {
         if (usernameField.getText().length() > 0) {
