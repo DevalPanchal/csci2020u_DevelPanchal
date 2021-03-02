@@ -70,12 +70,32 @@ public class Controller {
 
         double x2 = 50;
         for (double val: data2) {
-            double height = ((val - minVal) / (maxVal - minVal)) * h;
+            double height = (((val - minVal) / (maxVal - minVal)) * h) - 100;
             gc.setFill(Color.BLUE);
             gc.fillRect(x2, (h - height), xAxis2, height);
             x2 += xAxis2 + 50;
         }
     }
 
+    public void drawPieChart(int w, int h, double[] data, Color[] color) {
+        int angle = w / data.length;
+
+        double maxVal = Double.NEGATIVE_INFINITY;
+        double minVal = Double.MAX_VALUE;
+
+        for (double val: data) {
+            if (val > maxVal)
+                maxVal = val;
+            if (val < minVal)
+                minVal = val;
+        }
+
+        double x = 0;
+        for (double val: data) {
+            double arc = ((val - minVal) / (maxVal - minVal)) * h;
+
+        }
+
+    }
 
 }
