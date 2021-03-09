@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class Controller {
     @FXML
@@ -37,7 +38,9 @@ public class Controller {
         gc = mainCanvas.getGraphicsContext2D();
 
         drawBarGraphAvgHousing(350, 700, avgHousingPricesByYear, avgCommercialPricesByYear);
+        drawPieChart(800, 300, purchasesByAgeGroup, pieColours);
     }
+
 
     public void drawBarGraphAvgHousing(int w, int h, double[] data, double[] data2) {
 
@@ -77,25 +80,23 @@ public class Controller {
         }
     }
 
-    public void drawPieChart(int w, int h, double[] data, Color[] color) {
-        int angle = w / data.length;
+    public void drawPieChart(int w, int h, int[] data, Color[] color) {
+        int arcSum = 0;
+        int colorIndex = 0;
 
-        double maxVal = Double.NEGATIVE_INFINITY;
-        double minVal = Double.MAX_VALUE;
+        for (int val: data) {
+            arcSum += val;
+        }
+        double radius = 0;
 
         for (double val: data) {
-            if (val > maxVal)
-                maxVal = val;
-            if (val < minVal)
-                minVal = val;
+            double rad = 360 * (val / arcSum);
+            gc.setFill(color[colorIndex]);
+            colorIndex++;
+
+            gc.fillArc(w, h, 240, 240, radius, rad, ArcType.ROUND);
+            radius += rad;
         }
-
-        double x = 0;
-        for (double val: data) {
-            double arc = ((val - minVal) / (maxVal - minVal)) * h;
-
-        }
-
     }
 
 }
