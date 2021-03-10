@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.scene.text.Font;
 
 public class Controller {
     @FXML
@@ -39,6 +40,7 @@ public class Controller {
 
         drawBarGraphAvgHousing(350, 700, avgHousingPricesByYear, avgCommercialPricesByYear);
         drawPieChart(800, 300, purchasesByAgeGroup, pieColours);
+        drawLegend(gc);
     }
 
 
@@ -99,4 +101,31 @@ public class Controller {
         }
     }
 
+    private void drawLegend(GraphicsContext gc){
+        // Bar Graph Legend
+        gc.setFont(new Font("Calibri", 20));
+        gc.setFill(Color.BLACK);
+        gc.fillText("Avg House Prices", 100,100);
+        gc.fillText("Avg Commercial Prices", 100,120);
+
+        // Bar Graph Colours
+        gc.setFill(Color.RED);
+        gc.fillRect(80,85,15,15);
+        gc.setFill(Color.BLUE);
+        gc.fillRect(80,105,15,15);
+
+        // Pie Graph Legend
+        double y = 100;
+        for (String word : ageGroups){
+            gc.fillText(word, 850, y);
+            y += 20;
+        }
+        // Pie Graph Colours
+        y = 85;
+        for (int i = 0; i < pieColours.length; i++){
+            gc.setFill(pieColours[i]);
+            gc.fillRect(830,y,15,15);
+            y += 20;
+        }
+    }
 }
