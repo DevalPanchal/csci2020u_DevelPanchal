@@ -10,23 +10,22 @@ import java.util.TreeMap;
 public class FileLoader {
 
     private String fileName;
-    private Map<String, Double> weatherDataMap;
+    private Map<String, Integer> weatherDataMap;
 
     public FileLoader(String fileName) {
         this.fileName = fileName;
-        this.weatherDataMap = new TreeMap<>();
+        weatherDataMap = new TreeMap<>();
     }
 
     public void loadFile() {
         String line = "";
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
             while ((line = reader.readLine()) != null){
                 String[] columns = line.split(",");
-                System.out.println(columns[0]);
+                // column contains all the count for each of the weather warnings
+                countWeatherWarnings(columns[5], weatherDataMap);
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -34,14 +33,18 @@ public class FileLoader {
         }
     }
 
-    public void countWeatherWarnings(String word, Map<String, Double> temp) {
+    public void countWeatherWarnings(String word, Map<String, Integer> temp) {
         if (temp.containsKey(word)) {
-
+            int previous = temp.get(word);
+            temp.put(word, previous + 1);
+        } else {
+            temp.put(word, 1);
         }
     }
 
     public static void main(String[] args) {
         FileLoader loader = new FileLoader("weatherwarnings-2015.csv");
         loader.loadFile();
+        System.out.println(loader.weatherDataMap);
     }
 }
