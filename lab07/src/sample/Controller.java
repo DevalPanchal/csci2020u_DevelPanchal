@@ -31,7 +31,7 @@ public class Controller {
 
         loader.loadFile();
         weatherDataMap = loader.getWeatherData();
-        System.out.printf("Weather Data: %s\n", weatherDataMap);
+//        System.out.printf("Weather Data: %s\n", weatherDataMap);
         drawPieChart(500, 300, weatherDataMap, pieColours);
         drawLegend(500, 25, "Weather Warning", weatherDataMap, pieColours);
     }
@@ -44,7 +44,7 @@ public class Controller {
         for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
             arcSum += entry.getValue();
         }
-        System.out.println(tempMap);
+//        System.out.println(tempMap);
 
         for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
             double rad = 360 * ( (double) entry.getValue() / arcSum);
@@ -62,17 +62,17 @@ public class Controller {
         gc.setFill(Color.BLACK);
         gc.fillText(title, x, y);
 
-        double Y_Offset = 150;
+        double YOffset = 150;
         for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
-            gc.fillText(entry.getKey(), x + 30, Y_Offset);
-            Y_Offset += 20;
+            gc.fillText(entry.getKey(), x + 30, YOffset);
+            YOffset += 20;
         }
 
-        Y_Offset = 135;
+        YOffset = 135;
         for(int i = 0; i < color.length; i++) {
             gc.setFill(pieColours[i]);
-            gc.fillRect(x, Y_Offset, y, 15);
-            Y_Offset += 20;
+            gc.fillRect(x, YOffset, y, 15);
+            YOffset += 20;
         }
     }
 }
