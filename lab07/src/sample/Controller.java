@@ -22,7 +22,7 @@ public class Controller {
     private Map<String, Integer> weatherDataMap = new TreeMap<>();
 
     private static Color[] pieColours = {
-            Color.AQUA, Color.GOLD, Color.DARKORANGE, Color.DARKSALMON, Color.LAWNGREEN, Color.PLUM
+            Color.AQUA, Color.GOLD, Color.DARKORANGE, Color.DARKSALMON
     };
 
     @FXML
@@ -32,7 +32,8 @@ public class Controller {
         loader.loadFile();
         weatherDataMap = loader.getWeatherData();
         System.out.printf("Weather Data: %s\n", weatherDataMap);
-        drawPieChart(800, 300, weatherDataMap, pieColours);
+        drawPieChart(500, 300, weatherDataMap, pieColours);
+        drawLegend(500, 25, "Weather Warning", weatherDataMap, pieColours);
     }
 
     public void drawPieChart(int w, int h, Map<String, Integer> tempMap, Color[]  color) {
@@ -56,8 +57,22 @@ public class Controller {
         }
     }
 
-    public void drawLegend(int x, int y, Color[] color) {
+    public void drawLegend(int x, int y, String title, Map<String, Integer> tempMap, Color[] color) {
         gc.setFont(new Font("Calibri", 20));
+        gc.setFill(Color.BLACK);
+        gc.fillText(title, x, y);
 
+        double Y_Offset = 150;
+        for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
+            gc.fillText(entry.getKey(), x + 30, Y_Offset);
+            Y_Offset += 20;
+        }
+
+        Y_Offset = 135;
+        for(int i = 0; i < color.length; i++) {
+            gc.setFill(pieColours[i]);
+            gc.fillRect(x, Y_Offset, y, 15);
+            Y_Offset += 20;
+        }
     }
 }
