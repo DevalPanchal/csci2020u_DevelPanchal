@@ -17,6 +17,10 @@ public class FileLoader {
         weatherDataMap = new TreeMap<>();
     }
 
+    public Map<String, Integer> getWeatherData() {
+        return this.weatherDataMap;
+    }
+
     public void loadFile() {
         String line = "";
         try {
