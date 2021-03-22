@@ -34,8 +34,8 @@
     <TableView fx:id="tableView" GridPane.rowIndex="1" GridPane.columnIndex="0">
         <columns>
             <TableColumn fx:id="studentIDColumn" text="StudentID"></TableColumn>
-            <TableColumn fx:id="midtermColumn" text="Midterm"></TableColumn>
             <TableColumn fx:id="assignmentColumn" text="Assignments"></TableColumn>
+            <TableColumn fx:id="midtermColumn" text="Midterm"></TableColumn>
             <TableColumn fx:id="finalExamColumn" text="Final Exam"></TableColumn>
             <TableColumn fx:id="finalMarkColumn" text="Final Mark"></TableColumn>
             <TableColumn fx:id="letterGradeColumn" text="Letter Grade"></TableColumn>

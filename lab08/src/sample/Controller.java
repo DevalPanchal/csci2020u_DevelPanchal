@@ -46,6 +46,22 @@ public class Controller {
         }
     }
 
+    public void saveFileContent() {
+        Writer writer = null;
+        try {
+            File file = new File(this.currentFileName);
+
+            writer = new BufferedWriter(new FileWriter(file));
+            for (StudentRecord student: data) {
+                String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalMark() + "\n";
+
+                writer.write(text);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void initialize() {
         studentIDColumn.setCellValueFactory(new PropertyValueFactory<>("studentID"));
@@ -61,6 +77,10 @@ public class Controller {
 
         openFileItem.setOnAction(actionEvent -> {
             openFile(actionEvent);
+        });
+
+        saveFileItem.setOnAction(actionEvent -> {
+            saveFile(actionEvent);
         });
 
         exitItem.setOnAction(actionEvent -> {
@@ -96,8 +116,14 @@ public class Controller {
         this.currentFileName = currentFile;
     }
 
-    public void saveFile(ActionEvent e) { }
+    public void saveFile(ActionEvent e) {
+        FileChooser filechooser = new FileChooser();
+        setCurrentFileName(filechooser.showSaveDialog(Main.getPrimaryStage()).getName());
+        saveFileContent();
+    }
+
     public void saveFileAs(ActionEvent e) { }
+
     public void exit(ActionEvent e) {
         Stage currentStage = Main.getPrimaryStage();
         currentStage.close();

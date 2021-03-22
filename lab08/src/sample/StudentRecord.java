@@ -9,7 +9,7 @@ public class StudentRecord {
     private double finalMark;
     private char letterGrade;
 
-    public StudentRecord(String studentID, float midterm, float assignment, float finalExam) {
+    public StudentRecord(String studentID, float assignment, float midterm,float finalExam) {
         this.studentID = studentID;
         this.midterm = midterm;
         this.assignment = assignment;
