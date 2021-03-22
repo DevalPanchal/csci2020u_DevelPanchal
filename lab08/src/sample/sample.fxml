@@ -1,0 +1,61 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+
+
+
+    <MenuBar fx:id="menubar" id="menubar" GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <menus>
+            <Menu text="File">
+                <items>
+                    <MenuItem onAction="#newFile" text="New" />
+                    <MenuItem onAction="#openFile" text="Open" />
+                    <MenuItem onAction="#saveFile" text="Save" />
+                    <MenuItem onAction="#saveFileAs" text="Save As" />
+                    <MenuItem onAction="#exit" text="Exit" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+
+    <TableView fx:id="tableView" GridPane.rowIndex="1" GridPane.columnIndex="0">
+        <columns>
+            <TableColumn fx:id="studentIDColumn" text="StudentID"></TableColumn>
+            <TableColumn fx:id="midtermColumn" text="Midterm"></TableColumn>
+            <TableColumn fx:id="assignmentColumn" text="Assignments"></TableColumn>
+            <TableColumn fx:id="finalExamColumn" text="Final Exam"></TableColumn>
+            <TableColumn fx:id="finalMarkColumn" text="Final Mark"></TableColumn>
+            <TableColumn fx:id="letterGradeColumn" text="Letter Grade"></TableColumn>
+        </columns>
+    </TableView>
+
+    <GridPane alignment="TOP_LEFT" hgap="10" vgap="10" GridPane.rowIndex="2" GridPane.columnIndex="0">
+        <Label fx:id="sidLabel" id="sidLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">SID:</Label>
+        <TextField fx:id="SID" id="SID" promptText="SID" GridPane.rowIndex="2" GridPane.columnIndex="1"></TextField>
+
+        <Label fx:id="assignmentLabel" id="assignmentLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Assignments:</Label>
+        <TextField fx:id="assignment" id="assignment" promptText="Assignment/100" GridPane.rowIndex="2" GridPane.columnIndex="3"></TextField>
+
+        <Label fx:id="midtermLabel" id="midtermLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Midterm:</Label>
+        <TextField fx:id="midterm" id="midterm" promptText="Midterm/100" GridPane.rowIndex="3" GridPane.columnIndex="1"></TextField>
+
+        <Label fx:id="finalExamLabel" id="finalExamLabel" GridPane.rowIndex="3" GridPane.columnIndex="2">Final Exam:</Label>
+        <TextField fx:id="finalExam" id="finalExam" promptText="FinalExam/100" GridPane.rowIndex="3" GridPane.columnIndex="3"></TextField>
+
+        <Button fx:id="addbtn" id="addbtn" text="Add" GridPane.rowIndex="4" GridPane.columnIndex="0"></Button>
+    </GridPane>
+
+</GridPane>
