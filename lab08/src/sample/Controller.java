@@ -46,19 +46,20 @@ public class Controller {
         }
     }
 
-    public void saveFileContent() {
+    public void saveFileContent() throws IOException {
         Writer writer = null;
         try {
             File file = new File(this.currentFileName);
-
             writer = new BufferedWriter(new FileWriter(file));
             for (StudentRecord student: data) {
                 String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalMark() + "\n";
-
                 writer.write(text);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            writer.flush();
+            writer.close();
         }
     }
 
@@ -117,9 +118,13 @@ public class Controller {
     }
 
     public void saveFile(ActionEvent e) {
-        FileChooser filechooser = new FileChooser();
-        setCurrentFileName(filechooser.showSaveDialog(Main.getPrimaryStage()).getName());
-        saveFileContent();
+        try {
+            FileChooser filechooser = new FileChooser();
+            setCurrentFileName(filechooser.showSaveDialog(Main.getPrimaryStage()).getName());
+            saveFileContent();
+        } catch (IOException ev) {
+            ev.printStackTrace();
+        }
     }
 
     public void saveFileAs(ActionEvent e) { }
