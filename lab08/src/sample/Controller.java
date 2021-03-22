@@ -36,11 +36,11 @@ public class Controller {
     public void loadFile() {
         String line = "";
         try {
-            newFile();
+            resetData(data);
             BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
             while((line = reader.readLine()) != null) {
                 String[] columns = line.split(",");
-                data.add(new StudentRecord(columns[0], Float.parseFloat(columns[1]), Float.parseFloat(columns[2]), Float.parseFloat(columns[3])));
+                data.add(new StudentRecord(columns[0].toString(), Float.parseFloat(columns[1]), Float.parseFloat(columns[2]), Float.parseFloat(columns[3])));
             }
             tableView.setItems(data);
         } catch (IOException e) {
@@ -58,7 +58,7 @@ public class Controller {
         letterGradeColumn.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
 
         newFileItem.setOnAction(actionEvent -> {
-            newFile();
+            newFile(actionEvent);
         });
 
         openFileItem.setOnAction(actionEvent -> {
@@ -79,7 +79,7 @@ public class Controller {
     }
 
     // open new file with empty table
-    public void newFile() {
+    public void newFile(ActionEvent e) {
         // reset data to empty cell values
         resetData(data);
         // set table value items to empty data
@@ -87,6 +87,7 @@ public class Controller {
     }
 
     public void openFile(ActionEvent e) {
+
         FileChooser chooseFile = new FileChooser();
         File selectedFile = chooseFile.showOpenDialog(Main.getPrimaryStage());
         currentFileName = selectedFile.getName();
