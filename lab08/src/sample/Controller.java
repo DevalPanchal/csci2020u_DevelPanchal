@@ -28,6 +28,13 @@ public class Controller {
     @FXML private MenuItem saveFileItem;
     @FXML private MenuItem saveFileAsItem;
     @FXML private MenuItem exitItem;
+
+    @FXML private TextField SIDField;
+    @FXML private TextField assignmentField;
+    @FXML private TextField midtermField;
+    @FXML private TextField finalExamField;
+
+    @FXML private Button addBtn;
     private String currentFileName = "";
     private ObservableList<StudentRecord> data = DataSource.getAllMarks();
 
@@ -49,11 +56,15 @@ public class Controller {
     public void saveFileContent() throws IOException {
         Writer writer = null;
         try {
-            File file = new File(this.currentFileName);
-            writer = new BufferedWriter(new FileWriter(file));
-            for (StudentRecord student: data) {
-                String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalMark() + "\n";
-                writer.write(text);
+            if (this.currentFileName != null) {
+                File file = new File(this.currentFileName);
+                writer = new BufferedWriter(new FileWriter(file));
+                for (StudentRecord student: data) {
+                    String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalMark() + "\n";
+                    writer.write(text);
+                }
+            } else {
+                saveFile();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,14 +92,50 @@ public class Controller {
         });
 
         saveFileItem.setOnAction(actionEvent -> {
-            saveFile(actionEvent);
+            saveFile();
+        });
+
+        saveFileAsItem.setOnAction(actionEvent -> {
+            saveFileAs(actionEvent);
         });
 
         exitItem.setOnAction(actionEvent -> {
             exit(actionEvent);
         });
 
+        addBtn.setOnAction(actionEvent -> {
+            String sid = "";
+            float assignment = 0.0f;
+            float midterm = 0.0f;
+            float finalExam = 0.0f;
+            if (SIDField.getText().length() > 0) {
+                sid = SIDField.getText();
+                System.out.println(SIDField.getText().trim());
+            }
+            if (assignmentField.getText().length() > 0) {
+                assignment = Float.parseFloat(assignmentField.getText().trim());
+                System.out.println(assignmentField.getText());
+            }
+            if (midtermField.getText().length() > 0) {
+                midterm = Float.parseFloat(midtermField.getText().trim());
+                System.out.println(midtermField.getText());
+            }
+            if (finalExamField.getText().length() > 0) {
+                finalExam = Float.parseFloat(finalExamField.getText().trim());
+                System.out.println(finalExamField.getText());
+            }
+            data.add(new StudentRecord(sid, assignment, midterm, finalExam));
+            resetTextFieldState(SIDField);
+            resetTextFieldState(assignmentField);
+            resetTextFieldState(midtermField);
+            resetTextFieldState(finalExamField);
+        });
+
         tableView.setItems(data);
+    }
+
+    public void resetTextFieldState(TextField textfield) {
+        textfield.setText("");
     }
 
     private ObservableList<StudentRecord> resetData(ObservableList<StudentRecord> newData) {
@@ -117,7 +164,15 @@ public class Controller {
         this.currentFileName = currentFile;
     }
 
-    public void saveFile(ActionEvent e) {
+    public void saveFile() {
+        try {
+            saveFileContent();
+        } catch(IOException ev) {
+            ev.printStackTrace();
+        }
+    }
+
+    public void saveFileAs(ActionEvent e) {
         try {
             FileChooser filechooser = new FileChooser();
             setCurrentFileName(filechooser.showSaveDialog(Main.getPrimaryStage()).getName());
@@ -126,8 +181,6 @@ public class Controller {
             ev.printStackTrace();
         }
     }
-
-    public void saveFileAs(ActionEvent e) { }
 
     public void exit(ActionEvent e) {
         Stage currentStage = Main.getPrimaryStage();

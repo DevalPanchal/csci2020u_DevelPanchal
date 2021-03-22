@@ -44,18 +44,18 @@
 
     <GridPane alignment="TOP_LEFT" hgap="10" vgap="10" GridPane.rowIndex="2" GridPane.columnIndex="0">
         <Label fx:id="sidLabel" id="sidLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">SID:</Label>
-        <TextField fx:id="SID" id="SID" promptText="SID" GridPane.rowIndex="2" GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="SIDField" id="SID" promptText="SID" GridPane.rowIndex="2" GridPane.columnIndex="1"></TextField>
 
         <Label fx:id="assignmentLabel" id="assignmentLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Assignments:</Label>
-        <TextField fx:id="assignment" id="assignment" promptText="Assignment/100" GridPane.rowIndex="2" GridPane.columnIndex="3"></TextField>
+        <TextField fx:id="assignmentField" id="assignment" promptText="Assignment/100" GridPane.rowIndex="2" GridPane.columnIndex="3"></TextField>
 
         <Label fx:id="midtermLabel" id="midtermLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Midterm:</Label>
-        <TextField fx:id="midterm" id="midterm" promptText="Midterm/100" GridPane.rowIndex="3" GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="midtermField" id="midterm" promptText="Midterm/100" GridPane.rowIndex="3" GridPane.columnIndex="1"></TextField>
 
         <Label fx:id="finalExamLabel" id="finalExamLabel" GridPane.rowIndex="3" GridPane.columnIndex="2">Final Exam:</Label>
-        <TextField fx:id="finalExam" id="finalExam" promptText="FinalExam/100" GridPane.rowIndex="3" GridPane.columnIndex="3"></TextField>
+        <TextField fx:id="finalExamField" id="finalExam" promptText="FinalExam/100" GridPane.rowIndex="3" GridPane.columnIndex="3"></TextField>
 
-        <Button fx:id="addbtn" id="addbtn" text="Add" GridPane.rowIndex="4" GridPane.columnIndex="0"></Button>
+        <Button fx:id="addBtn" id="addBtn" text="Add" GridPane.rowIndex="4" GridPane.columnIndex="0"></Button>
     </GridPane>
 
 </GridPane>
