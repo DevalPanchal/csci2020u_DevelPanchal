@@ -29,18 +29,16 @@ public class Controller {
     @FXML private MenuItem saveFileAsItem;
     @FXML private MenuItem exitItem;
     private String currentFileName = "";
-    private String fileName;
-
     private ObservableList<StudentRecord> data = DataSource.getAllMarks();
 
     public void loadFile() {
         String line = "";
         try {
-            resetData(data);
-            BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
+            newFile();
+            BufferedReader reader = new BufferedReader(new FileReader(this.currentFileName));
             while((line = reader.readLine()) != null) {
                 String[] columns = line.split(",");
-                data.add(new StudentRecord(columns[0].toString(), Float.parseFloat(columns[1]), Float.parseFloat(columns[2]), Float.parseFloat(columns[3])));
+                data.add(new StudentRecord(columns[0].trim(), Float.parseFloat(columns[1].trim()), Float.parseFloat(columns[2].trim()), Float.parseFloat(columns[3].trim())));
             }
             tableView.setItems(data);
         } catch (IOException e) {
@@ -58,7 +56,7 @@ public class Controller {
         letterGradeColumn.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
 
         newFileItem.setOnAction(actionEvent -> {
-            newFile(actionEvent);
+            newFile();
         });
 
         openFileItem.setOnAction(actionEvent -> {
@@ -79,7 +77,7 @@ public class Controller {
     }
 
     // open new file with empty table
-    public void newFile(ActionEvent e) {
+    public void newFile() {
         // reset data to empty cell values
         resetData(data);
         // set table value items to empty data
@@ -87,12 +85,17 @@ public class Controller {
     }
 
     public void openFile(ActionEvent e) {
-
         FileChooser chooseFile = new FileChooser();
         File selectedFile = chooseFile.showOpenDialog(Main.getPrimaryStage());
-        currentFileName = selectedFile.getName();
+//        currentFileName = selectedFile.getName();
+        setCurrentFileName(selectedFile.getName());
         loadFile();
     }
+
+    public void setCurrentFileName(String currentFile) {
+        this.currentFileName = currentFile;
+    }
+
     public void saveFile(ActionEvent e) { }
     public void saveFileAs(ActionEvent e) { }
     public void exit(ActionEvent e) {
