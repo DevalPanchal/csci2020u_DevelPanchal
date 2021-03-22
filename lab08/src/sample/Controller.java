@@ -1,12 +1,13 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class Controller {
     @FXML private MenuBar menubar;
@@ -18,14 +19,14 @@ public class Controller {
     @FXML private TableColumn finalMarkColumn;
     @FXML private TableColumn letterGradeColumn;
 
+    @FXML private MenuItem newFileItem;
+    @FXML private MenuItem openFileItem;
+    @FXML private MenuItem saveFileItem;
+    @FXML private MenuItem saveFileAsItem;
+    @FXML private MenuItem exitItem;
+    private String currentFileName = "";
+
     private ObservableList<StudentRecord> data = DataSource.getAllMarks();
-
-
-    public void newFile(ActionEvent e) { }
-    public void openFile(ActionEvent e) { }
-    public void saveFile(ActionEvent e) { }
-    public void saveFileAs(ActionEvent e) { }
-    public void exit(ActionEvent e) { }
 
     @FXML
     public void initialize() {
@@ -36,6 +37,39 @@ public class Controller {
         finalMarkColumn.setCellValueFactory(new PropertyValueFactory<>("finalMark"));
         letterGradeColumn.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
 
-        tableView.setItems(DataSource.getAllMarks());
+        newFileItem.setOnAction(actionEvent -> {
+            newFile(actionEvent);
+        });
+
+
+
+
+        exitItem.setOnAction(actionEvent -> {
+            exit(actionEvent);
+        });
+        tableView.setItems(data);
+    }
+
+
+    // open new file with empty table
+    public void newFile(ActionEvent e) {
+        // reset data to empty cell values
+        resetData(data);
+        // set table value items to empty data
+        tableView.setItems(data);
+    }
+
+    private ObservableList<StudentRecord> resetData(ObservableList<StudentRecord> newData) {
+        newData = FXCollections.observableArrayList();
+        this.data = newData;
+        return newData;
+    }
+
+    public void openFile(ActionEvent e) { }
+    public void saveFile(ActionEvent e) { }
+    public void saveFileAs(ActionEvent e) { }
+    public void exit(ActionEvent e) {
+        Stage currentStage = Main.getPrimaryStage();
+        currentStage.close();
     }
 }
