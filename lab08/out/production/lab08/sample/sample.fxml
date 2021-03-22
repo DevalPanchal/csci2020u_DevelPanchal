@@ -21,11 +21,11 @@
         <menus>
             <Menu text="File">
                 <items>
-                    <MenuItem fx:id="newFileItem" onAction="#newFile" text="New" />
+                    <MenuItem fx:id="newFileItem"  text="New" />
                     <MenuItem fx:id="openFileItem" onAction="#openFile" text="Open" />
                     <MenuItem fx:id="saveFileItem" onAction="#saveFile" text="Save" />
                     <MenuItem fx:id="saveFileAsItem" onAction="#saveFileAs" text="Save As" />
-                    <MenuItem fx:id="exitItem" onAction="#exit" text="Exit" />
+                    <MenuItem fx:id="exitItem"  text="Exit" />
                 </items>
             </Menu>
         </menus>

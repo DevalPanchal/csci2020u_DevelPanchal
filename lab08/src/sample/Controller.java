@@ -7,10 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.*;
 
 public class Controller {
     @FXML private MenuBar menubar;
+
     @FXML private TableView tableView;
     @FXML private TableColumn studentIDColumn;
     @FXML private TableColumn midtermColumn;
@@ -25,8 +29,24 @@ public class Controller {
     @FXML private MenuItem saveFileAsItem;
     @FXML private MenuItem exitItem;
     private String currentFileName = "";
+    private String fileName;
 
     private ObservableList<StudentRecord> data = DataSource.getAllMarks();
+
+    public void loadFile() {
+        String line = "";
+        try {
+            newFile();
+            BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
+            while((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+                data.add(new StudentRecord(columns[0], Float.parseFloat(columns[1]), Float.parseFloat(columns[2]), Float.parseFloat(columns[3])));
+            }
+            tableView.setItems(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void initialize() {
@@ -38,24 +58,17 @@ public class Controller {
         letterGradeColumn.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
 
         newFileItem.setOnAction(actionEvent -> {
-            newFile(actionEvent);
+            newFile();
         });
 
-
-
+        openFileItem.setOnAction(actionEvent -> {
+            openFile(actionEvent);
+        });
 
         exitItem.setOnAction(actionEvent -> {
             exit(actionEvent);
         });
-        tableView.setItems(data);
-    }
 
-
-    // open new file with empty table
-    public void newFile(ActionEvent e) {
-        // reset data to empty cell values
-        resetData(data);
-        // set table value items to empty data
         tableView.setItems(data);
     }
 
@@ -65,7 +78,20 @@ public class Controller {
         return newData;
     }
 
-    public void openFile(ActionEvent e) { }
+    // open new file with empty table
+    public void newFile() {
+        // reset data to empty cell values
+        resetData(data);
+        // set table value items to empty data
+        tableView.setItems(data);
+    }
+
+    public void openFile(ActionEvent e) {
+        FileChooser chooseFile = new FileChooser();
+        File selectedFile = chooseFile.showOpenDialog(Main.getPrimaryStage());
+        currentFileName = selectedFile.getName();
+        loadFile();
+    }
     public void saveFile(ActionEvent e) { }
     public void saveFileAs(ActionEvent e) { }
     public void exit(ActionEvent e) {
