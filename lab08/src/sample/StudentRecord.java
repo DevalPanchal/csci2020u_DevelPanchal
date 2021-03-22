@@ -1,5 +1,7 @@
 package sample;
 
+import java.text.DecimalFormat;
+
 public class StudentRecord {
     private String studentID;
     private float midterm;
@@ -9,7 +11,7 @@ public class StudentRecord {
     private double finalMark;
     private char letterGrade;
 
-    public StudentRecord(String studentID, float assignment, float midterm,float finalExam) {
+    public StudentRecord(String studentID, float assignment, float midterm, float finalExam) {
         this.studentID = studentID;
         this.midterm = midterm;
         this.assignment = assignment;
@@ -38,6 +40,9 @@ public class StudentRecord {
         double weightedFinalExam = this.finalExam * 0.5;
 
         this.finalMark = weightedAssignment + weightedMidterm + weightedFinalExam;
+
+        DecimalFormat df = new DecimalFormat("0.000");
+
 
         return this.finalMark;
     }

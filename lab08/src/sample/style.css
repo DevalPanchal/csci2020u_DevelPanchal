@@ -1,0 +1,44 @@
+.menubar {
+    -fx-background-color: #6699ff;
+}
+
+.menubar-file {
+    -fx-background-color: #000;
+}
+
+.menubar-file:hover {
+    -fx-cursor: hand;
+}
+
+#newfile:hover, #openfile:hover, #savefile:hover, #savefileas:hover, #exit:hover {
+    -fx-cursor: hand;
+}
+
+.add-btn {
+    -fx-font-size: 15px;
+    -fx-border-radius: 15px;
+    -fx-background-color: #282c34;
+    -fx-text-fill: #ffffff;
+}
+
+.add-btn:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+    -fx-cursor: hand;
+}
+
+.add-btn:pressed {
+    -fx-background-color: #282c34;
+    -fx-text-fill: #ffffff;
+}
+
+#sidLabel, #assignmentLabel, #midtermLabel, #finalExamLabel {
+    -fx-font-weight: bold;
+}
+
+
+.sidfield:hover, .assignmentfield:hover, .midtermfield:hover, .finalexamfield:hover {
+    -fx-background-color: #f0f0f0;
+}
+

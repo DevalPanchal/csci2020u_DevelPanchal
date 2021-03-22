@@ -12,20 +12,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
+<?import java.net.URL?>
 <GridPane fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
 
 
-    <MenuBar fx:id="menubar" id="menubar" GridPane.rowIndex="0" GridPane.columnIndex="0">
+    <MenuBar fx:id="menubar" id="menubar" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="menubar">
         <menus>
-            <Menu text="File">
+            <Menu text="File" styleClass="menubar-file">
                 <items>
-                    <MenuItem fx:id="newFileItem"  text="New" />
-                    <MenuItem fx:id="openFileItem" onAction="#openFile" text="Open" />
-                    <MenuItem fx:id="saveFileItem" onAction="#saveFile" text="Save" />
-                    <MenuItem fx:id="saveFileAsItem" onAction="#saveFileAs" text="Save As" />
-                    <MenuItem fx:id="exitItem"  text="Exit" />
+                    <MenuItem fx:id="newFileItem" id="newfile" text="New" />
+                    <MenuItem fx:id="openFileItem" id="openfile" onAction="#openFile" text="Open" />
+                    <MenuItem fx:id="saveFileItem" id="savefile" onAction="#saveFile" text="Save" />
+                    <MenuItem fx:id="saveFileAsItem" id="savefileas" onAction="#saveFileAs" text="Save As" />
+                    <MenuItem fx:id="exitItem" id="exit" text="Exit" />
                 </items>
             </Menu>
         </menus>
@@ -44,18 +45,21 @@
 
     <GridPane alignment="TOP_LEFT" hgap="10" vgap="10" GridPane.rowIndex="2" GridPane.columnIndex="0">
         <Label fx:id="sidLabel" id="sidLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">SID:</Label>
-        <TextField fx:id="SIDField" id="SID" promptText="SID" GridPane.rowIndex="2" GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="SIDField" id="SID" promptText="SID" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="sidfield"></TextField>
 
         <Label fx:id="assignmentLabel" id="assignmentLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Assignments:</Label>
-        <TextField fx:id="assignmentField" id="assignment" promptText="Assignment/100" GridPane.rowIndex="2" GridPane.columnIndex="3"></TextField>
+        <TextField fx:id="assignmentField" id="assignment" promptText="Assignment/100" GridPane.rowIndex="2" GridPane.columnIndex="3" styleClass="assignmentfield"></TextField>
 
         <Label fx:id="midtermLabel" id="midtermLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Midterm:</Label>
-        <TextField fx:id="midtermField" id="midterm" promptText="Midterm/100" GridPane.rowIndex="3" GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="midtermField" id="midterm" promptText="Midterm/100" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="midtermfield"></TextField>
 
         <Label fx:id="finalExamLabel" id="finalExamLabel" GridPane.rowIndex="3" GridPane.columnIndex="2">Final Exam:</Label>
-        <TextField fx:id="finalExamField" id="finalExam" promptText="FinalExam/100" GridPane.rowIndex="3" GridPane.columnIndex="3"></TextField>
+        <TextField fx:id="finalExamField" id="finalExam" promptText="FinalExam/100" GridPane.rowIndex="3" GridPane.columnIndex="3" styleClass="finalexamfield"></TextField>
 
-        <Button fx:id="addBtn" id="addBtn" text="Add" GridPane.rowIndex="4" GridPane.columnIndex="0"></Button>
+        <Button fx:id="addBtn" id="addBtn" text="Add" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="add-btn"></Button>
     </GridPane>
 
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
 </GridPane>

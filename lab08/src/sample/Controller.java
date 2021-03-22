@@ -38,6 +38,9 @@ public class Controller {
     private String currentFileName = "";
     private ObservableList<StudentRecord> data = DataSource.getAllMarks();
 
+    /**
+     * Loads a csv file and the parse the data while input the data into the student record arraylist
+     */
     public void loadFile() {
         String line = "";
         try {
@@ -53,6 +56,12 @@ public class Controller {
         }
     }
 
+    /**
+     * saves contents of the current window
+     * -> if the current file name exists then save to that file
+     * --> otherwise prompt user to make a new file via FileChooser
+     * @throws IOException
+     */
     public void saveFileContent() throws IOException {
         Writer writer = null;
         try {
@@ -60,7 +69,7 @@ public class Controller {
                 File file = new File(this.currentFileName);
                 writer = new BufferedWriter(new FileWriter(file));
                 for (StudentRecord student: data) {
-                    String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalMark() + "\n";
+                    String text = student.getStudentID() + "," + student.getAssignment() + "," + student.getMidterm() + "," + student.getFinalExam() + "\n";
                     writer.write(text);
                 }
             } else {
@@ -74,6 +83,9 @@ public class Controller {
         }
     }
 
+    /**
+     *  Interacts with data interaction on the user interface (specific for this controller)
+     */
     @FXML
     public void initialize() {
         studentIDColumn.setCellValueFactory(new PropertyValueFactory<>("studentID"));
@@ -83,6 +95,7 @@ public class Controller {
         finalMarkColumn.setCellValueFactory(new PropertyValueFactory<>("finalMark"));
         letterGradeColumn.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
 
+        // set event listener when this menu item is clicked
         newFileItem.setOnAction(actionEvent -> {
             newFile();
         });
@@ -103,6 +116,7 @@ public class Controller {
             exit(actionEvent);
         });
 
+        // handle add button event, to add new student data to the tableview
         addBtn.setOnAction(actionEvent -> {
             String sid = "";
             float assignment = 0.0f;
@@ -110,19 +124,19 @@ public class Controller {
             float finalExam = 0.0f;
             if (SIDField.getText().length() > 0) {
                 sid = SIDField.getText();
-                System.out.println(SIDField.getText().trim());
+                //System.out.println(SIDField.getText().trim());
             }
             if (assignmentField.getText().length() > 0) {
                 assignment = Float.parseFloat(assignmentField.getText().trim());
-                System.out.println(assignmentField.getText());
+                //System.out.println(assignmentField.getText());
             }
             if (midtermField.getText().length() > 0) {
                 midterm = Float.parseFloat(midtermField.getText().trim());
-                System.out.println(midtermField.getText());
+                //System.out.println(midtermField.getText());
             }
             if (finalExamField.getText().length() > 0) {
                 finalExam = Float.parseFloat(finalExamField.getText().trim());
-                System.out.println(finalExamField.getText());
+                //System.out.println(finalExamField.getText());
             }
             data.add(new StudentRecord(sid, assignment, midterm, finalExam));
             resetTextFieldState(SIDField);
@@ -130,21 +144,32 @@ public class Controller {
             resetTextFieldState(midtermField);
             resetTextFieldState(finalExamField);
         });
-
+        // set the table view items to student record data
         tableView.setItems(data);
     }
 
+    /**
+     * Resets a textfield to empty
+     * @param textfield
+     */
     public void resetTextFieldState(TextField textfield) {
         textfield.setText("");
     }
 
+    /**
+     * Resets an Observable list for StudentRecord
+     * @param newData
+     * @return
+     */
     private ObservableList<StudentRecord> resetData(ObservableList<StudentRecord> newData) {
         newData = FXCollections.observableArrayList();
         this.data = newData;
         return newData;
     }
 
-    // open new file with empty table
+    /**
+     * Opens a new file with empty tableview
+     */
     public void newFile() {
         // reset data to empty cell values
         resetData(data);
@@ -152,6 +177,10 @@ public class Controller {
         tableView.setItems(data);
     }
 
+    /**
+     * Opens a file (csv format) to load data in file into the tableview
+     * @param e
+     */
     public void openFile(ActionEvent e) {
         FileChooser chooseFile = new FileChooser();
         File selectedFile = chooseFile.showOpenDialog(Main.getPrimaryStage());
@@ -160,10 +189,17 @@ public class Controller {
         loadFile();
     }
 
+    /**
+     * Sets the current file name
+     * @param currentFile
+     */
     public void setCurrentFileName(String currentFile) {
         this.currentFileName = currentFile;
     }
 
+    /**
+     * Saves the contents of a file into current file
+     */
     public void saveFile() {
         try {
             saveFileContent();
@@ -172,6 +208,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Saves a file as a custom name into a custom directory
+     * @param e
+     */
     public void saveFileAs(ActionEvent e) {
         try {
             FileChooser filechooser = new FileChooser();
@@ -182,6 +222,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Exits the window
+     * @param e
+     */
     public void exit(ActionEvent e) {
         Stage currentStage = Main.getPrimaryStage();
         currentStage.close();
