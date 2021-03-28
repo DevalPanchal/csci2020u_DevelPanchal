@@ -3,12 +3,14 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Controller {
@@ -36,17 +38,33 @@ public class Controller {
         }
     }
 
-    public void drawLinePlot(int x, int y, List<Float> stock1, List<Float> stock2) {
-        // draw vertical line
+    public void drawLinePlot(List<Float> stock1, List<Float> stock2) {
+        int height = 500;
+        int width = 600;
+        int x = 50;
+        int y = 500;
+
         gc.strokeLine(x, y, x, y - 450);
-        // draw horizontal line
         gc.strokeLine(x, y, x + 600, y);
 
-        for (int i = 0; i < stock1.size(); i++) {
-            gc.strokeLine(x, 500 - stock1.get(i), x + 10, 500 - (stock1.get(i)));
-            x = x + 10;
-        }
+        int dataPoint = Math.max(stock1.size(), stock1.size());
+        float stockMax1 = Collections.max(stock1);
+        float stockMax2 = Collections.max(stock2);
 
+        float xAxis = (float) width / dataPoint;
+        float yAxis = (float) height / Math.max(stockMax1, stockMax2);
+
+
+        plotLine(stock1, height, yAxis, xAxis, Color.BLUE);
+        plotLine(stock2, height, yAxis, xAxis, Color.RED);
+    }
+
+    public void plotLine(List<Float> stock, int height, float yAxis, float xAxis, Color color) {
+        gc.setStroke(color);
+
+        for (int i = 0; i < stock.size() - 1; i++) {
+            gc.strokeLine(i * xAxis + 50, height - stock.get(i) * yAxis, (i+1)*xAxis + 50,height-stock.get(i + 1) * yAxis);
+        }
     }
 
     public void initialize() {
@@ -57,6 +75,6 @@ public class Controller {
         System.out.println(GOOGStock);
         System.out.println(AAPLStock);
 
-        drawLinePlot(50, 500, GOOGStock, AAPLStock);
+        drawLinePlot(GOOGStock, AAPLStock);
     }
 }
