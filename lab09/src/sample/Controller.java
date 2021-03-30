@@ -38,32 +38,34 @@ public class Controller {
         }
     }
 
-    public void drawLinePlot(List<Float> stock1, List<Float> stock2) {
+    public void drawLinePlot(int initialX, int initialY, List<Float> stock1, List<Float> stock2) {
         int height = 500;
         int width = 600;
         int x = 50;
         int y = 500;
 
-        gc.strokeLine(x, y, x, y - 450);
-        gc.strokeLine(x, y, x + 600, y);
+        // draw vertical line
+        gc.strokeLine(x, y, x, y - initialY);
+        // draw horizontal line
+        gc.strokeLine(x, y, x + initialX, y);
 
         int dataPoint = Math.max(stock1.size(), stock1.size());
         float stockMax1 = Collections.max(stock1);
         float stockMax2 = Collections.max(stock2);
 
-        float xAxis = (float) width / dataPoint;
-        float yAxis = (float) height / Math.max(stockMax1, stockMax2);
+        float xDifference = (float) width / dataPoint;
+        float yDifference = (float) height / Math.max(stockMax1, stockMax2);
 
 
-        plotLine(stock1, height, yAxis, xAxis, Color.BLUE);
-        plotLine(stock2, height, yAxis, xAxis, Color.RED);
+        plotLine(stock1, height, yDifference, xDifference, Color.RED);
+        plotLine(stock2, height, yDifference, xDifference, Color.BLUE);
     }
 
-    public void plotLine(List<Float> stock, int height, float yAxis, float xAxis, Color color) {
+    public void plotLine(List<Float> stock, int height, float yDifference, float xDifference, Color color) {
         gc.setStroke(color);
-
-        for (int i = 0; i < stock.size() - 1; i++) {
-            gc.strokeLine(i * xAxis + 50, height - stock.get(i) * yAxis, (i+1)*xAxis + 50,height-stock.get(i + 1) * yAxis);
+        int size = stock.size();
+        for (int i = 0; i < size - 1; i++) {
+            gc.strokeLine(i * xDifference + 50, height - stock.get(i) * yDifference, (i+1)*xDifference + 50,height-stock.get(i + 1) * yDifference);
         }
     }
 
@@ -75,6 +77,6 @@ public class Controller {
         System.out.println(GOOGStock);
         System.out.println(AAPLStock);
 
-        drawLinePlot(GOOGStock, AAPLStock);
+        drawLinePlot(600,450,GOOGStock, AAPLStock);
     }
 }
