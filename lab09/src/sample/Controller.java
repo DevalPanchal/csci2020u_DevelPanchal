@@ -49,7 +49,7 @@ public class Controller {
         // draw horizontal line
         gc.strokeLine(x, y, x + initialX, y);
 
-        int dataPoint = Math.max(stock1.size(), stock1.size());
+        int dataPoint = stock1.size();
         float stockMax1 = Collections.max(stock1);
         float stockMax2 = Collections.max(stock2);
 
@@ -65,7 +65,7 @@ public class Controller {
         gc.setStroke(color);
         int size = stock.size();
         for (int i = 0; i < size - 1; i++) {
-            gc.strokeLine(i * xDifference + 50, height - stock.get(i) * yDifference, (i+1)*xDifference + 50,height-stock.get(i + 1) * yDifference);
+            gc.strokeLine(i * xDifference + 50, height - stock.get(i) * yDifference, (i + 1)*xDifference + 50,height-stock.get(i + 1) * yDifference);
         }
     }
 
