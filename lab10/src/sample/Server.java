@@ -17,10 +17,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server{
-
-
-
+public class Server {
     private ServerSocket serverSocket = null;
     private int port;
 
@@ -41,15 +38,12 @@ public class Server{
     public static void main(String[] args) {
         int port = 8080;
         try {
-
             Server server = new Server(port);
             server.handleRequests();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }
 
 class ConnectionHandler implements Runnable {
@@ -76,6 +70,7 @@ class ConnectionHandler implements Runnable {
             Scanner inputStream = new Scanner(socket.getInputStream());
             PrintWriter outputStream = new PrintWriter(socket.getOutputStream(), true);
             System.out.println(inputStream.nextLine());
+
         } catch(Exception e) {
             e.printStackTrace();
         }

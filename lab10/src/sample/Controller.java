@@ -34,15 +34,16 @@ public class Controller {
         Socket clientSocket = null;
         PrintWriter out = null;
 
+        StringBuilder stringToServer = new StringBuilder();
         try {
             clientSocket = new Socket("localhost", 8080);
             out = new PrintWriter(new BufferedOutputStream(clientSocket.getOutputStream()));
-            out.println(username + "\n" + message);
-
+            stringToServer.append(username).append(" ").append(message);
+            out.println(stringToServer);
             resetText(usernameField);
             resetText(messageField);
             out.flush();
-            out.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
