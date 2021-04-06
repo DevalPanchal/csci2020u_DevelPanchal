@@ -38,7 +38,7 @@ public class Controller {
         try {
             clientSocket = new Socket("localhost", 8080);
             out = new PrintWriter(new BufferedOutputStream(clientSocket.getOutputStream()));
-            stringToServer.append(username).append(" ").append(message);
+            stringToServer.append(username).append(":").append(" ").append(message).append("\n");
             out.println(stringToServer);
             resetText(usernameField);
             resetText(messageField);
