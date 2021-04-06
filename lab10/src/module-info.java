@@ -3,4 +3,5 @@ module lab10 {
     requires javafx.controls;
 
     opens sample;
+    opens server;
 }
