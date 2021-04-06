@@ -81,10 +81,8 @@ public class ServerController {
             System.out.println("Connected: " + socket);
             try {
                 Scanner in = new Scanner(socket.getInputStream());
-
                 String message = in.nextLine();
                 addMessage("\n" + message);
-
                 System.out.println(message);
                 in.close();
                 socket.close();
@@ -101,5 +99,4 @@ public class ServerController {
             }
         }
     }
-
 }
